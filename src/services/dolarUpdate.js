@@ -17,7 +17,6 @@ const getPages = async (key, id) => {
 };
 
 const dolarUpdate = async () => {
-  console.log("dolar");
   const notionKey = config.NOTION_KEY;
   const databaseId = config.DATABASE_ID;
   const dolars = await getDolarValue();
