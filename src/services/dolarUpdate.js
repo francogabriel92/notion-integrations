@@ -21,10 +21,11 @@ const dolarUpdate = async () => {
   const databaseId = config.DATABASE_ID;
   const dolars = await getDolarValue();
   const pages = await getPages(notionKey, databaseId);
-
+  
   await Promise.all(
     await dolars.map(async (d) => {
       const { nombre, compra, venta } = d.casa;
+      console.log(typeof parseFloat(compra), compra);
       const page = pages.filter(
         (p) =>
           p.properties.Name.title[0].plain_text.toLowerCase().trim() ===
@@ -34,13 +35,13 @@ const dolarUpdate = async () => {
       const payload = JSON.stringify({
         properties: {
           Sell: {
-            number: parseFloat(venta),
+            number: parseFloat(venta.replace(',', '.')),
           },
           Buy: {
             number:
-              typeof parseFloat(compra) === typeof NaN
-                ? parseFloat(venta)
-                : parseFloat(compra),
+              compra.includes('No Cotiza')
+                ? parseFloat(venta.replace(',', '.'))
+                : parseFloat(compra.replace(',', '.')),
           },
         },
       });
