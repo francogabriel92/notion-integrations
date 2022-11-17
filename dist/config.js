@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PORT = exports.DATABASE_ID = exports.NOTION_KEY = void 0;
+require("dotenv").config();
+const NOTION_KEY = process.env.NOTION_KEY;
+exports.NOTION_KEY = NOTION_KEY;
+const DATABASE_ID = process.env.DATABASE_ID;
+exports.DATABASE_ID = DATABASE_ID;
+const PORT = process.env.PORT;
+exports.PORT = PORT;
