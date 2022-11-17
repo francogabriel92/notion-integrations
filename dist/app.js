@@ -13,17 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const app = (0, express_1.default)();
 const dolarUpdate_1 = require("./services/dolarUpdate");
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
 app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const responseStatus = yield (0, dolarUpdate_1.dolarUpdate)();
         res.send({ status: responseStatus, message: "Dolar updated in Notion" });
     }
     catch (e) {
-        // console.log(e);
         if (e instanceof Error)
             res.send({ status: 500, error: e.message });
     }
